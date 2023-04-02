@@ -1,10 +1,9 @@
 #! /proyectos/anaconda3/envs/home_sensors/bin/python
 
 import lywsd02
-#import numpy as np
 from datetime import datetime
-#import pandas as pd
 import sys
+from colors import bcolors as c
 
 args = sys.argv
 label = args[1]
@@ -26,7 +25,7 @@ try:
     dt = S.time[0] - now # current date and time
     timestr = now.strftime("%Y-%m-%d %H:%M:%S")
 except:
-    print(f"ERROR getting data")
+    print(f"{c.FAIL}ERROR getting data{c.ENDC}")
     # Do not write a line, stop function and return error code 1
     pass
     #raise Exception('Error getting data.')
@@ -38,4 +37,4 @@ f = open(label + '_temp.csv','a')
 f.write(f'{timestr},{data.temperature:2.2f},{data.humidity:4.0f},{data.battery:4.1f},{dt.total_seconds():9.2f}\n')
 f.close()
 
-print(f"OK")
+print(f"{c.OKGREEN}OK{c.ENDC}")
