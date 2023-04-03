@@ -38,7 +38,13 @@ except:
 folder = "/home/data/temperatura_casa"
 name = label + "_temp.csv"
 filename = os.path.join(folder,name)
-f = open(filename,'a')
+
+if not os.path.isfile(filename):
+    f = open(filename,'x')
+    f.write(f'date,temperature,humidity,battery,delay\n')
+else:
+    f = open(filename,'a')
+
 f.write(f'{timestr},{data.temperature:2.2f},{data.humidity:4.0f},{data.battery:4.1f},{dt.total_seconds():9.2f}\n')
 f.close()
 
