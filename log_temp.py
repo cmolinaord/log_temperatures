@@ -3,6 +3,7 @@
 import lywsd02
 from datetime import datetime
 import sys
+import os
 from colors import bcolors as c
 
 args = sys.argv
@@ -33,7 +34,11 @@ except:
 
 #print(f'Time: {timestr}\nTemperature: {data.temperature:2.2f}º\nHumidity: {data.humidity:4.0f}%\nBattery: {data.battery:4.1f}%\nClock delay: {dt.total_seconds():9.2f} s')
 
-f = open(label + '_temp.csv','a')
+# Write data into CSV file
+folder = "/home/data/temperatura_casa"
+name = label + "_temp.csv"
+filename = os.path.join(folder,name)
+f = open(filename,'a')
 f.write(f'{timestr},{data.temperature:2.2f},{data.humidity:4.0f},{data.battery:4.1f},{dt.total_seconds():9.2f}\n')
 f.close()
 
