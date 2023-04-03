@@ -42,4 +42,10 @@ f = open(filename,'a')
 f.write(f'{timestr},{data.temperature:2.2f},{data.humidity:4.0f},{data.battery:4.1f},{dt.total_seconds():9.2f}\n')
 f.close()
 
-print(f"{c.OKGREEN}OK{c.ENDC} {data.temperature:2.2f}º")
+print(f"{c.OKGREEN}OK{c.ENDC} {data.temperature:2.2f}º. ",end="")
+
+if abs(dt.seconds) > 3600:
+    S.time = now
+    print(f"{c.WARNING}Syncronized internal clock by {dt.seconds:1.2f} s{c.ENDC}")
+else:
+    print("")
